@@ -28,6 +28,8 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> disposeModel() async {
+    usernameController.dispose();
+    passwordController.dispose();
     super.disposeModel();
   }
 
@@ -35,13 +37,13 @@ class LoginViewModel extends BaseViewModel {
     return usernameController.text.isNotEmpty && passwordController.text.isNotEmpty;
   }
 
-  void updateUsername(String username) {
-    usernameController.text = username;
+  void updateUsername(String value) {
+    usernameController.text = value;
     notifyListeners();
   }
 
-  void updatePassword(String password) {
-    passwordController.text = password;
+  void updatePassword(String value) {
+    passwordController.text = value;
     notifyListeners();
   }
 

@@ -12,7 +12,7 @@ class AppImage {
   static const String icPerson = 'assets/svg/ic_person.svg';
   static const String icPersonActive = 'assets/svg/ic_person_active.svg';
 
-  static const String leaves = 'assets/images/leaves.png';
-  static const String notes = 'assets/images/notes.png';
   static const String bgHome = 'assets/images/bg_home.png';
+  static const String product = 'assets/images/product.png';
+  static const String vendor = 'assets/images/vendor.png';
 }

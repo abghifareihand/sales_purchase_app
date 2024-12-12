@@ -133,7 +133,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         Flexible(
                           child: MenuCard(
-                            icon: AppImage.leaves,
+                            icon: AppImage.product,
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -146,7 +146,7 @@ class HomePage extends StatelessWidget {
                         ),
                         Flexible(
                           child: MenuCard(
-                            icon: AppImage.notes,
+                            icon: AppImage.vendor,
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -167,7 +167,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         Flexible(
                           child: MenuCard(
-                            icon: AppImage.leaves,
+                            icon: AppImage.product,
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -180,7 +180,7 @@ class HomePage extends StatelessWidget {
                         ),
                         Flexible(
                           child: MenuCard(
-                            icon: AppImage.notes,
+                            icon: AppImage.vendor,
                             onPressed: () {
                               Navigator.push(
                                 context,

@@ -17,7 +17,7 @@ class SalesMainView extends StatelessWidget {
       onModelDispose: (SalesMainViewModel model) => model.disposeModel(),
       builder: (BuildContext context, SalesMainViewModel model, _) {
         return Scaffold(
-          backgroundColor: AppColor.background,
+          backgroundColor: AppColor.white,
           body: IndexedStack(
             index: model.selectedIndex,
             children: model.pages,

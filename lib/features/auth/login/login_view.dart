@@ -69,7 +69,7 @@ class LoginContent extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: SvgPicture.asset(AppImage.icUsername),
             ),
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             onChanged: (value) {
               model.updateUsername(value);

@@ -32,7 +32,7 @@ class CustomTextField extends StatefulWidget {
     this.suffixIcon,
     this.readOnly = false,
     this.textInputAction,
-    this.borderRadius = 18.0,
+    this.borderRadius = 14.0,
     this.textCapitalization = TextCapitalization.none,
     this.helperText,
     this.maxLines = 1,
@@ -75,7 +75,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         TextFormField(
           style: AppFont.medium.copyWith(
             color: AppColor.black,
-            fontSize: 16,
+            fontSize: 14,
           ),
           textCapitalization: widget.textCapitalization,
           controller: widget.controller,
@@ -88,7 +88,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           decoration: InputDecoration(
             hintStyle: AppFont.regular.copyWith(
               color: AppColor.gray,
-              fontSize: 16,
+              fontSize: 14,
             ),
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.obscureText

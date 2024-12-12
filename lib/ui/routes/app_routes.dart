@@ -10,4 +10,5 @@ class AppRoutes {
   // SALES
   static const String salesMain = '/sales/main';
   static const String salesHome = '/sales/home';
+  static const String salesAddProduct = '/sales/home/add-product';
 }

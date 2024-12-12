@@ -15,7 +15,7 @@ class PurchasingProfileView extends StatelessWidget {
       onModelDispose: (PurchasingProfileViewModel model) => model.disposeModel(),
       builder: (BuildContext context, PurchasingProfileViewModel model, _) {
         return Scaffold(
-          backgroundColor: AppColor.background,
+          backgroundColor: AppColor.white,
           body: model.isBusy
               ? const Center(
                   child: CircularProgressIndicator(
