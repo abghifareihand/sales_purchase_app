@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:sales_purchase_app/features/auth/login/login_view.dart';
 import 'package:sales_purchase_app/features/auth/splash/splash_view.dart';
+import 'package:sales_purchase_app/features/purchasing/main/purchasing_main_view.dart';
+import 'package:sales_purchase_app/features/sales/main/sales_main_view.dart';
 import 'app_routes.dart';
 
 class AppPages {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      // SPLASH
+      // AUTH
       case AppRoutes.authSplash:
         return MaterialPageRoute(builder: (_) => const SplashView());
-
-      // LOGIN
       case AppRoutes.authLogin:
         return MaterialPageRoute(builder: (_) => const LoginView());
+
+      // PURCHASING
+      case AppRoutes.purchasingMain:
+        return MaterialPageRoute(builder: (_) => const PurchasingMainView());
+
+      // SALES
+      case AppRoutes.salesMain:
+        return MaterialPageRoute(builder: (_) => const SalesMainView());
 
       default:
         return MaterialPageRoute(

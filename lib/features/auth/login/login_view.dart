@@ -67,7 +67,7 @@ class LoginContent extends StatelessWidget {
             label: 'Username',
             prefixIcon: Padding(
               padding: const EdgeInsets.all(12.0),
-              child: SvgPicture.asset(AppImage.icEmail),
+              child: SvgPicture.asset(AppImage.icUsername),
             ),
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,

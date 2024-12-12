@@ -114,7 +114,11 @@ class Button extends StatelessWidget {
                   ],
                   Text(
                     label,
-                    style: TextStyle(color: textColor, fontSize: fontSize, fontWeight: fontWeight),
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: fontSize,
+                      fontWeight: fontWeight,
+                    ),
                   ),
                   if (suffixIcon != null && label.isNotEmpty) ...[
                     const SizedBox(width: 10.0),

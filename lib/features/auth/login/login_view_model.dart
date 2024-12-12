@@ -64,14 +64,14 @@ class LoginViewModel extends BaseViewModel {
         apiMessage = result.data!.username;
         if (role == 1) {
           if (context.mounted) {
-            await Navigator.of(context).pushNamed(
-              AppRoutes.salesHome,
+            await Navigator.of(context).pushReplacementNamed(
+              AppRoutes.salesMain,
             );
           }
         } else if (role == 2) {
           if (context.mounted) {
-            await Navigator.of(context).pushNamed(
-              AppRoutes.purchasingHome,
+            await Navigator.of(context).pushReplacementNamed(
+              AppRoutes.purchasingMain,
             );
           }
         } else {

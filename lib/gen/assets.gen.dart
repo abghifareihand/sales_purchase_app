@@ -21,8 +21,11 @@ class $AssetsImagesGen {
   /// File path: assets/images/notes.png
   AssetGenImage get notes => const AssetGenImage('assets/images/notes.png');
 
+  /// File path: assets/images/success.png
+  AssetGenImage get success => const AssetGenImage('assets/images/success.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [bgHome, leaves, notes];
+  List<AssetGenImage> get values => [bgHome, leaves, notes, success];
 }
 
 class $AssetsSvgGen {
@@ -55,11 +58,8 @@ class $AssetsSvgGen {
   /// File path: assets/svg/ic_transaction_active.svg
   String get icTransactionActive => 'assets/svg/ic_transaction_active.svg';
 
-  /// File path: assets/svg/leaves.svg
-  String get leaves => 'assets/svg/leaves.svg';
-
-  /// File path: assets/svg/notes.svg
-  String get notes => 'assets/svg/notes.svg';
+  /// File path: assets/svg/ic_username.svg
+  String get icUsername => 'assets/svg/ic_username.svg';
 
   /// List of all assets
   List<String> get values => [
@@ -72,8 +72,7 @@ class $AssetsSvgGen {
         icProfileActive,
         icTransaction,
         icTransactionActive,
-        leaves,
-        notes
+        icUsername
       ];
 }
 
