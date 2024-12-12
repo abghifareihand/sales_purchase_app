@@ -38,4 +38,11 @@ extension DateTimeExt on DateTime {
     String minute = wibTime.minute.toString().padLeft(2, '0');
     return '$day $month $year, $hour.$minute';
   }
+
+  String toFormattedDateForApi() {
+    String year = wibTime.year.toString();
+    String month = wibTime.month.toString().padLeft(2, '0');
+    String day = wibTime.day.toString().padLeft(2, '0');
+    return '$year-$month-$day';
+  }
 }

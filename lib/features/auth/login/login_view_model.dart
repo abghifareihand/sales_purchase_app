@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:retrofit/dio.dart';
 import 'package:sales_purchase_app/core/api/base_api.dart';
 import 'package:sales_purchase_app/core/models/auth/login_model.dart';
+import 'package:sales_purchase_app/core/services/shared_pref_service.dart';
 import 'package:sales_purchase_app/features/base_view_model.dart';
 import 'package:sales_purchase_app/ui/components/custom_error_dialog.dart';
 import 'package:sales_purchase_app/ui/components/custom_snackbar.dart';
@@ -62,6 +63,8 @@ class LoginViewModel extends BaseViewModel {
       final status = loginResponse.data.status;
       if (statusCode == 200 && status == 'success') {
         final LoginResponse result = loginResponse.data;
+        await SharedPrefService.saveUserId(result.data!.id);
+        await SharedPrefService.saveRoleId(result.data!.role);
         final role = result.data?.role;
         apiMessage = result.data!.username;
         if (role == 1) {
@@ -83,7 +86,7 @@ class LoginViewModel extends BaseViewModel {
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return const CustomErrorDialog(
-                  title: 'Admin login di website',
+                  title: 'Admin login via website',
                 );
               },
             );
@@ -93,7 +96,7 @@ class LoginViewModel extends BaseViewModel {
         if (context.mounted) {
           CustomSnackbar.show(
             context,
-            message: 'Username atau password salah',
+            message: 'Incorrect username or password',
             backgroundColor: AppColor.red,
           );
         }

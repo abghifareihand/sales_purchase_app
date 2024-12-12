@@ -15,17 +15,17 @@ class $AssetsImagesGen {
   /// File path: assets/images/bg_home.png
   AssetGenImage get bgHome => const AssetGenImage('assets/images/bg_home.png');
 
-  /// File path: assets/images/leaves.png
-  AssetGenImage get leaves => const AssetGenImage('assets/images/leaves.png');
-
-  /// File path: assets/images/notes.png
-  AssetGenImage get notes => const AssetGenImage('assets/images/notes.png');
+  /// File path: assets/images/product.png
+  AssetGenImage get product => const AssetGenImage('assets/images/product.png');
 
   /// File path: assets/images/success.png
   AssetGenImage get success => const AssetGenImage('assets/images/success.png');
 
+  /// File path: assets/images/vendor.png
+  AssetGenImage get vendor => const AssetGenImage('assets/images/vendor.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [bgHome, leaves, notes, success];
+  List<AssetGenImage> get values => [bgHome, product, success, vendor];
 }
 
 class $AssetsSvgGen {
@@ -45,6 +45,15 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/ic_password.svg
   String get icPassword => 'assets/svg/ic_password.svg';
+
+  /// File path: assets/svg/ic_person.svg
+  String get icPerson => 'assets/svg/ic_person.svg';
+
+  /// File path: assets/svg/ic_person_active.svg
+  String get icPersonActive => 'assets/svg/ic_person_active.svg';
+
+  /// File path: assets/svg/ic_photo.svg
+  String get icPhoto => 'assets/svg/ic_photo.svg';
 
   /// File path: assets/svg/ic_profile.svg
   String get icProfile => 'assets/svg/ic_profile.svg';
@@ -68,6 +77,9 @@ class $AssetsSvgGen {
         icHomeActive,
         icLogout,
         icPassword,
+        icPerson,
+        icPersonActive,
+        icPhoto,
         icProfile,
         icProfileActive,
         icTransaction,

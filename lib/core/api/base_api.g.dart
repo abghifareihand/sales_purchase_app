@@ -56,6 +56,119 @@ class _BaseApi implements BaseApi {
     return httpResponse;
   }
 
+  @override
+  Future<HttpResponse<ProductResponse>> getProductData() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<HttpResponse<ProductResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/sales-request/data',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ProductResponse _value;
+    try {
+      _value = ProductResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    final httpResponse = HttpResponse(_value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<AddProductResponse>> addProduct(
+    String idSales,
+    String dateRequest,
+    String productName,
+    File productPhoto,
+    String quantity,
+    String description,
+    String partNumber,
+    String customerName,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'id_sales',
+      idSales,
+    ));
+    _data.fields.add(MapEntry(
+      'date_request',
+      dateRequest,
+    ));
+    _data.fields.add(MapEntry(
+      'product_name',
+      productName,
+    ));
+    _data.files.add(MapEntry(
+      'product_photo',
+      MultipartFile.fromFileSync(
+        productPhoto.path,
+        filename: productPhoto.path.split(Platform.pathSeparator).last,
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'quantity',
+      quantity,
+    ));
+    _data.fields.add(MapEntry(
+      'description',
+      description,
+    ));
+    _data.fields.add(MapEntry(
+      'part_number',
+      partNumber,
+    ));
+    _data.fields.add(MapEntry(
+      'customer_name',
+      customerName,
+    ));
+    final _options = _setStreamType<HttpResponse<AddProductResponse>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'multipart/form-data',
+    )
+        .compose(
+          _dio.options,
+          '/api/sales-request/create',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AddProductResponse _value;
+    try {
+      _value = AddProductResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    final httpResponse = HttpResponse(_value, _result);
+    return httpResponse;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

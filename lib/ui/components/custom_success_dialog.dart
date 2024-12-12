@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:sales_purchase_app/ui/components/custom_button.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/ui/shared/app_font.dart';
+import 'package:sales_purchase_app/ui/shared/app_image.dart';
 
-class CustomErrorDialog extends StatelessWidget {
-  const CustomErrorDialog({
+class CustomSuccessDialog extends StatelessWidget {
+  const CustomSuccessDialog({
     super.key,
     required this.title,
+    required this.onPressed,
   });
   final String title;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +26,19 @@ class CustomErrorDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            Image.asset(
+              AppImage.success,
+              width: 120,
+              height: 120,
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
             Text(
               title,
-              style: AppFont.medium.copyWith(
-                color: AppColor.black,
-                fontSize: 18,
+              style: AppFont.bold.copyWith(
+                color: AppColor.primary,
+                fontSize: 16,
               ),
               textAlign: TextAlign.center,
             ),
@@ -35,9 +46,7 @@ class CustomErrorDialog extends StatelessWidget {
             Button.filled(
               height: 48,
               borderRadius: 12,
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: onPressed,
               label: 'OK',
             ),
           ],

@@ -7,29 +7,31 @@ import 'package:sales_purchase_app/ui/shared/app_image.dart';
 class NameTile extends StatelessWidget {
   final String name;
   final String role;
+  final bool purchasing;
   const NameTile({
     super.key,
     required this.name,
     required this.role,
+    this.purchasing = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 40,
-        horizontal: 20,
+      padding: EdgeInsets.symmetric(
+        vertical: purchasing ? 20 : 40,
+        horizontal: purchasing ? 0 : 20,
       ),
       child: Row(
         children: [
           ClipOval(
             child: Container(
               padding: const EdgeInsets.all(8),
-              color: Colors.white,
+              color: purchasing ? AppColor.primary : AppColor.white,
               child: SvgPicture.asset(
                 AppImage.icUsername,
-                colorFilter: const ColorFilter.mode(
-                  AppColor.black,
+                colorFilter: ColorFilter.mode(
+                  purchasing ? AppColor.white : AppColor.primary,
                   BlendMode.srcIn,
                 ),
               ),
@@ -44,14 +46,14 @@ class NameTile extends StatelessWidget {
               Text(
                 name,
                 style: AppFont.bold.copyWith(
-                  color: AppColor.white,
+                  color: purchasing ? AppColor.primary : AppColor.white,
                   fontSize: 16,
                 ),
               ),
               Text(
                 role,
                 style: AppFont.regular.copyWith(
-                  color: AppColor.white,
+                  color: purchasing ? AppColor.primary : AppColor.white,
                   fontSize: 14,
                 ),
               ),

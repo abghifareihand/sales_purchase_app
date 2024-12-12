@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sales_purchase_app/ui/extensions/date_time_ext.dart';
+import 'package:sales_purchase_app/ui/shared/app_font.dart';
 
 import '../shared/app_color.dart';
 
@@ -20,7 +21,7 @@ class CustomDatePicker extends StatefulWidget {
     this.onDateSelected,
     this.prefix,
     this.hintText,
-    this.borderRadius = 18.0,
+    this.borderRadius = 14.0,
   });
 
   @override
@@ -72,9 +73,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
         if (widget.showLabel) ...[
           Text(
             widget.label,
-            style: const TextStyle(
+            style: AppFont.bold.copyWith(
+              color: AppColor.black,
               fontSize: 14,
-              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 12.0),
@@ -83,6 +84,10 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           controller: controller,
           onTap: () => _selectDate(context),
           readOnly: true,
+          style: AppFont.medium.copyWith(
+            color: AppColor.black,
+            fontSize: 14,
+          ),
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius),

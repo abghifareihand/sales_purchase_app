@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sales_purchase_app/features/purchasing/profile/purchasing_profile_view_model.dart';
+import 'package:sales_purchase_app/ui/components/custom_button.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
-import 'package:sales_purchase_app/ui/shared/app_font.dart';
 
 class PurchasingProfileView extends StatelessWidget {
   const PurchasingProfileView({super.key});
@@ -34,20 +35,17 @@ class ProfileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PurchasingProfileViewModel model = Provider.of<PurchasingProfileViewModel>(context);
     return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           const SizedBox(
             height: 40.0,
           ),
-          Center(
-            child: Text(
-              'PURCHASING PROFILE',
-              style: AppFont.bold.copyWith(
-                color: AppColor.black,
-                fontSize: 16,
-              ),
-            ),
+          Button.filled(
+            onPressed: () => model.logout(context),
+            label: 'Logout',
           ),
         ],
       ),
