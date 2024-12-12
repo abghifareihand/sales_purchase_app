@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:retrofit/dio.dart';
 import 'package:sales_purchase_app/core/api/base_api.dart';
 import 'package:sales_purchase_app/core/models/sales/add_product_model.dart';
+import 'package:sales_purchase_app/core/services/shared_pref_service.dart';
 import 'package:sales_purchase_app/features/base_view_model.dart';
 import 'package:sales_purchase_app/ui/components/custom_snackbar.dart';
 import 'package:sales_purchase_app/ui/components/custom_success_dialog.dart';
@@ -22,6 +23,7 @@ class AddProductViewModel extends BaseViewModel {
   final TextEditingController nameProductController = TextEditingController();
   final TextEditingController quantityProductController = TextEditingController();
   final TextEditingController descProductController = TextEditingController();
+  final TextEditingController partNumberController = TextEditingController();
   final TextEditingController custNameController = TextEditingController();
   DateTime? selectDate;
   File? photoProduct;
@@ -41,12 +43,17 @@ class AddProductViewModel extends BaseViewModel {
     nameProductController.dispose();
     quantityProductController.dispose();
     descProductController.dispose();
+    partNumberController.dispose();
     custNameController.dispose();
     super.disposeModel();
   }
 
   bool get isFormValid {
-    return nameProductController.text.isNotEmpty && quantityProductController.text.isNotEmpty && descProductController.text.isNotEmpty && custNameController.text.isNotEmpty && photoProduct != null;
+    return nameProductController.text.isNotEmpty && quantityProductController.text.isNotEmpty && descProductController.text.isNotEmpty && partNumberController.text.isNotEmpty && custNameController.text.isNotEmpty && photoProduct != null;
+  }
+
+  Future<int?> getUserId() async {
+    return await SharedPrefService.getUserId();
   }
 
   Future<void> pickPhotoProduct() async {
@@ -84,6 +91,11 @@ class AddProductViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void updatePartNumber(String value) {
+    partNumberController.text = value;
+    notifyListeners();
+  }
+
   void updateCustName(String value) {
     custNameController.text = value;
     notifyListeners();
@@ -92,18 +104,19 @@ class AddProductViewModel extends BaseViewModel {
   Future<void> createProduct(BuildContext context) async {
     setBusy(true);
     try {
+      final userId = await getUserId();
       final File file = File(photoProduct!.path);
       final DateTime dateToSend = selectDate ?? DateTime.now();
       final formattedDate = DateFormat('yyyy-MM-dd').format(dateToSend);
 
       final HttpResponse<AddProductResponse> productResponse = await baseApi.addProduct(
-        '1',
+        userId.toString(),
         formattedDate,
         nameProductController.text,
         file,
         quantityProductController.text,
         descProductController.text,
-        'A56SGSG',
+        partNumberController.text.toUpperCase(),
         custNameController.text,
       );
       final statusCode = productResponse.response.statusCode;

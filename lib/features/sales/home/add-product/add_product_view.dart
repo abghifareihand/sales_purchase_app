@@ -94,6 +94,18 @@ class AddProductContent extends StatelessWidget {
             height: 16.0,
           ),
           CustomTextField(
+            controller: model.partNumberController,
+            label: 'Part Number',
+            textCapitalization: TextCapitalization.characters,
+            textInputAction: TextInputAction.next,
+            onChanged: (value) {
+              model.updatePartNumber(value);
+            },
+          ),
+          const SizedBox(
+            height: 16.0,
+          ),
+          CustomTextField(
             controller: model.quantityProductController,
             label: 'Quantity',
             keyboardType: TextInputType.number,
