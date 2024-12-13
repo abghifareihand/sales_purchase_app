@@ -20,8 +20,11 @@ class SalesMenuCard extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         width: 120,
-        height: 120,
-        padding: const EdgeInsets.all(16),
+        height: 140,
+        padding: const EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 24,
+        ),
         decoration: BoxDecoration(
           color: AppColor.white,
           borderRadius: BorderRadius.circular(8.0),
@@ -48,7 +51,9 @@ class SalesMenuCard extends StatelessWidget {
               style: AppFont.medium.copyWith(
                 color: AppColor.primary,
                 fontSize: 14,
+                height: 1.2,
               ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),

@@ -17,7 +17,7 @@ class PurchasingHomeViewModel extends BaseViewModel {
   Future<void> initModel() async {
     setBusy(true);
     super.initModel();
-    await fetchProduct();
+    // await fetchProduct();
     setBusy(false);
   }
 
@@ -29,7 +29,7 @@ class PurchasingHomeViewModel extends BaseViewModel {
   Future<void> fetchProduct() async {
     setBusy(true);
     try {
-      final HttpResponse<ProductResponse> productResponse = await baseApi.getProductData();
+      final HttpResponse<ProductResponse> productResponse = await baseApi.getProductList();
       final statusCode = productResponse.response.statusCode;
       final status = productResponse.data.status;
       if (statusCode == 200 && status == 'success') {

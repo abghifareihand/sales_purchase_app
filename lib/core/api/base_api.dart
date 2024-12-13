@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sales_purchase_app/core/models/auth/login_model.dart';
+import 'package:sales_purchase_app/core/models/purchasing/product_detail_model.dart';
 import 'package:sales_purchase_app/core/models/purchasing/product_model.dart';
 import 'package:sales_purchase_app/core/models/sales/add_product_model.dart';
 
@@ -18,7 +19,12 @@ abstract class BaseApi {
   );
 
   @GET('/api/sales-request/data')
-  Future<HttpResponse<ProductResponse>> getProductData();
+  Future<HttpResponse<ProductResponse>> getProductList();
+
+  @GET('/api/sales-request/detail')
+  Future<HttpResponse<ProductDetailResponse>> getDetailProduct(
+    @Query('id') int productId,
+  );
 
   @POST('/api/sales-request/create')
   @MultiPart()

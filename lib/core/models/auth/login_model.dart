@@ -23,6 +23,7 @@ class LoginResponse {
     required this.status,
     required this.message,
     this.data,
+    this.token,
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => _$LoginResponseFromJson(json);
@@ -30,6 +31,7 @@ class LoginResponse {
   final String status;
   final String message;
   final LoginData? data;
+  final String? token;
 
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 }
@@ -41,6 +43,7 @@ class LoginData {
     required this.name,
     required this.username,
     required this.role,
+    this.fcmToken,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -51,6 +54,7 @@ class LoginData {
   final String name;
   final String username;
   final int role;
+  final String? fcmToken;
   final String createdAt;
   final String updatedAt;
 

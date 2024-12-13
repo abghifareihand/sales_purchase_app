@@ -57,7 +57,7 @@ class _BaseApi implements BaseApi {
   }
 
   @override
-  Future<HttpResponse<ProductResponse>> getProductData() async {
+  Future<HttpResponse<ProductResponse>> getProductList() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -82,6 +82,42 @@ class _BaseApi implements BaseApi {
     late ProductResponse _value;
     try {
       _value = ProductResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    final httpResponse = HttpResponse(_value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<ProductDetailResponse>> getDetailProduct(
+      int productId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'id': productId};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options =
+        _setStreamType<HttpResponse<ProductDetailResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/sales-request/detail',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ProductDetailResponse _value;
+    try {
+      _value = ProductDetailResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -27,7 +27,6 @@ class AddProductViewModel extends BaseViewModel {
   final TextEditingController custNameController = TextEditingController();
   DateTime? selectDate;
   File? photoProduct;
-  String? photoProductName;
 
   String apiMessage = '';
 
@@ -61,7 +60,6 @@ class AddProductViewModel extends BaseViewModel {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       photoProduct = File(image.path);
-      photoProductName = image.name;
       notifyListeners();
     }
   }
@@ -71,7 +69,6 @@ class AddProductViewModel extends BaseViewModel {
     final XFile? image = await picker.pickImage(source: ImageSource.camera);
     if (image != null) {
       photoProduct = File(image.path);
-      photoProductName = image.name;
       notifyListeners();
     }
   }

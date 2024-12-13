@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "785783803080",
+    "project_id": "salespurchasingapp",
+    "storage_bucket": "salespurchasingapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785783803080:android:a1edc4c62a0bfdf070e9fd",
+        "android_client_info": {
+          "package_name": "com.adr.sales_purchase_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdZUGPIFodootX78QPyrYepWqkk-ok5bg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

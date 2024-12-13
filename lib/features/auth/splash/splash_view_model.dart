@@ -20,11 +20,13 @@ class SplashViewModel extends BaseViewModel {
 
   Future<void> navigateSplash(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 3));
+    final authToken = await SharedPrefService.getAuthToken();
     final userId = await SharedPrefService.getUserId();
     final roleId = await SharedPrefService.getRoleId();
 
-    log('User ID: $userId');
-    log('Role ID: $roleId');
+    log('Auth Token : $authToken');
+    log('User ID : $userId');
+    log('Role ID : $roleId');
 
     // if (context.mounted) {
     //   Navigator.of(context).pushNamedAndRemoveUntil(
@@ -34,7 +36,7 @@ class SplashViewModel extends BaseViewModel {
     // }
 
     if (context.mounted) {
-      if (userId != null) {
+      if (authToken != null && userId != null) {
         if (roleId == 1) {
           Navigator.of(context).pushReplacementNamed(
             AppRoutes.salesMain,

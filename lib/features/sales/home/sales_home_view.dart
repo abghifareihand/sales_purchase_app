@@ -61,7 +61,7 @@ class HomeContent extends StatelessWidget {
                     children: [
                       SalesMenuCard(
                         icon: AppImage.product,
-                        title: 'Product',
+                        title: 'Create Product',
                         onPressed: () {
                           Navigator.of(context).pushNamed(
                             AppRoutes.salesAddProduct,
@@ -70,7 +70,7 @@ class HomeContent extends StatelessWidget {
                       ),
                       SalesMenuCard(
                         icon: AppImage.vendor,
-                        title: 'Vendor',
+                        title: 'List Product',
                         onPressed: () {},
                       ),
                     ],

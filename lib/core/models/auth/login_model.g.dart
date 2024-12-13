@@ -24,6 +24,7 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
       data: json['data'] == null
           ? null
           : LoginData.fromJson(json['data'] as Map<String, dynamic>),
+      token: json['token'] as String?,
     );
 
 Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
@@ -31,6 +32,7 @@ Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
       'status': instance.status,
       'message': instance.message,
       'data': instance.data,
+      'token': instance.token,
     };
 
 LoginData _$LoginDataFromJson(Map<String, dynamic> json) => LoginData(
@@ -38,6 +40,7 @@ LoginData _$LoginDataFromJson(Map<String, dynamic> json) => LoginData(
       name: json['name'] as String,
       username: json['username'] as String,
       role: (json['role'] as num).toInt(),
+      fcmToken: json['fcm_token'] as String?,
       createdAt: json['created_at'] as String,
       updatedAt: json['updated_at'] as String,
     );
@@ -47,6 +50,7 @@ Map<String, dynamic> _$LoginDataToJson(LoginData instance) => <String, dynamic>{
       'name': instance.name,
       'username': instance.username,
       'role': instance.role,
+      'fcm_token': instance.fcmToken,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
     };

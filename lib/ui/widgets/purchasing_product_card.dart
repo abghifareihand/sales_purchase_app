@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sales_purchase_app/core/models/purchasing/product_model.dart';
+import 'package:sales_purchase_app/ui/routes/app_routes.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/ui/shared/app_font.dart';
 import 'package:shimmer/shimmer.dart';
@@ -12,7 +13,12 @@ class PurchasingProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          AppRoutes.purchasingDetailProduct,
+          arguments: data.id,
+        );
+      },
       child: Stack(
         children: [
           Container(

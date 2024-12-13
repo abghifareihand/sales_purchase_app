@@ -6,6 +6,7 @@ class AppRoutes {
   // PURCHASING
   static const String purchasingMain = '/purchasing/main';
   static const String purchasingHome = '/purchasing/home';
+  static const String purchasingDetailProduct = '/purchasing/home/detail-product';
 
   // SALES
   static const String salesMain = '/sales/main';
