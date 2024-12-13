@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:sales_purchase_app/core/api/url_api.dart';
 import 'package:sales_purchase_app/core/services/shared_pref_service.dart';
 
 class FcmService {
@@ -92,7 +93,7 @@ class FcmService {
       final String? authToken = await SharedPrefService.getAuthToken();
       if (authToken != null) {
         final response = await dio.post(
-          'https://testingpurchasing.kopramandiri.com/api/sales-request/save-fcm-token',
+          '${UrlApi.baseUrl}/api/sales-request/save-fcm-token',
           data: {
             'fcm_token': fcmToken,
           },
