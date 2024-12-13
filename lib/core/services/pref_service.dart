@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPrefService {
+class PrefService {
   static const String _userIdKey = 'userId';
   static const String _roleIdKey = 'roleId';
   static const String _authTokenKey = 'authToken';

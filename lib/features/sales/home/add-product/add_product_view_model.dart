@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:retrofit/dio.dart';
 import 'package:sales_purchase_app/core/api/base_api.dart';
 import 'package:sales_purchase_app/core/models/sales/add_product_model.dart';
-import 'package:sales_purchase_app/core/services/shared_pref_service.dart';
+import 'package:sales_purchase_app/core/services/pref_service.dart';
 import 'package:sales_purchase_app/features/base_view_model.dart';
 import 'package:sales_purchase_app/ui/components/custom_snackbar.dart';
 import 'package:sales_purchase_app/ui/components/custom_success_dialog.dart';
@@ -52,7 +52,7 @@ class AddProductViewModel extends BaseViewModel {
   }
 
   Future<int?> getUserId() async {
-    return await SharedPrefService.getUserId();
+    return await PrefService.getUserId();
   }
 
   Future<void> pickPhotoProduct() async {

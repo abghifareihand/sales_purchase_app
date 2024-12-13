@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sales_purchase_app/core/services/shared_pref_service.dart';
+import 'package:sales_purchase_app/core/services/pref_service.dart';
 import 'package:sales_purchase_app/features/base_view_model.dart';
 import 'package:sales_purchase_app/ui/components/custom_snackbar.dart';
 import 'package:sales_purchase_app/ui/routes/app_routes.dart';
@@ -19,7 +19,7 @@ class SalesProfileViewModel extends BaseViewModel {
   }
 
   Future<void> logout(BuildContext context) async {
-    await SharedPrefService.logout();
+    await PrefService.logout();
     if (context.mounted) {
       CustomSnackbar.show(
         context,

@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sales_purchase_app/core/api/url_api.dart';
-import 'package:sales_purchase_app/core/services/shared_pref_service.dart';
+import 'package:sales_purchase_app/core/services/pref_service.dart';
 
 class FcmService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
@@ -29,7 +29,7 @@ class FcmService {
     );
 
     final fcmToken = await _firebaseMessaging.getToken();
-    final isAuthToken = await SharedPrefService.isAuthToken();
+    final isAuthToken = await PrefService.isAuthToken();
     log('FCM Token : $fcmToken');
     if (isAuthToken) {
       if (fcmToken != null) {
@@ -90,7 +90,7 @@ class FcmService {
 
   Future<void> _updateFcmToken(String fcmToken) async {
     try {
-      final String? authToken = await SharedPrefService.getAuthToken();
+      final String? authToken = await PrefService.getAuthToken();
       if (authToken != null) {
         final response = await dio.post(
           '${UrlApi.baseUrl}/api/sales-request/save-fcm-token',

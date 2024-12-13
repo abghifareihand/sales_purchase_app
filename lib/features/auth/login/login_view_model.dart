@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sales_purchase_app/core/api/base_api.dart';
 import 'package:sales_purchase_app/core/models/auth/login_model.dart';
-import 'package:sales_purchase_app/core/services/shared_pref_service.dart';
+import 'package:sales_purchase_app/core/services/pref_service.dart';
 import 'package:sales_purchase_app/features/base_view_model.dart';
 import 'package:sales_purchase_app/ui/components/custom_error_dialog.dart';
 import 'package:sales_purchase_app/ui/components/custom_snackbar.dart';
@@ -63,9 +63,9 @@ class LoginViewModel extends BaseViewModel {
       final status = loginResponse.data.status;
       if (statusCode == 200 && status == 'success') {
         final LoginResponse result = loginResponse.data;
-        await SharedPrefService.saveAuthToken(result.token!);
-        await SharedPrefService.saveRoleId(result.data!.role);
-        await SharedPrefService.saveUserId(result.data!.id);
+        await PrefService.saveAuthToken(result.token!);
+        await PrefService.saveRoleId(result.data!.role);
+        await PrefService.saveUserId(result.data!.id);
 
         final role = result.data?.role;
         apiMessage = result.data!.username;

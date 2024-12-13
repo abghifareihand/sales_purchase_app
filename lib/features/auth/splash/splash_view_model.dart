@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:sales_purchase_app/core/services/shared_pref_service.dart';
+import 'package:sales_purchase_app/core/services/pref_service.dart';
 import 'package:sales_purchase_app/features/base_view_model.dart';
 import 'package:sales_purchase_app/ui/routes/app_routes.dart';
 
@@ -20,9 +20,9 @@ class SplashViewModel extends BaseViewModel {
 
   Future<void> navigateSplash(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 3));
-    final authToken = await SharedPrefService.getAuthToken();
-    final userId = await SharedPrefService.getUserId();
-    final roleId = await SharedPrefService.getRoleId();
+    final authToken = await PrefService.getAuthToken();
+    final userId = await PrefService.getUserId();
+    final roleId = await PrefService.getRoleId();
 
     log('Auth Token : $authToken');
     log('User ID : $userId');
