@@ -57,10 +57,47 @@ class _BaseApi implements BaseApi {
   }
 
   @override
-  Future<HttpResponse<ProductResponse>> getProductList() async {
+  Future<HttpResponse<UserResponse>> getUser(String bearerToken) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': bearerToken};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<HttpResponse<UserResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/sales-request/user',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UserResponse _value;
+    try {
+      _value = UserResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    final httpResponse = HttpResponse(_value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<ProductResponse>> purchasingGetProduct(
+      String bearerToken) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': bearerToken};
+    _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<HttpResponse<ProductResponse>>(Options(
       method: 'GET',
@@ -91,11 +128,14 @@ class _BaseApi implements BaseApi {
   }
 
   @override
-  Future<HttpResponse<ProductDetailResponse>> getDetailProduct(
-      int productId) async {
+  Future<HttpResponse<ProductDetailResponse>> purchasingGetDetailProduct(
+    String bearerToken,
+    int productId,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': productId};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': bearerToken};
+    _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ProductDetailResponse>>(Options(
@@ -127,7 +167,8 @@ class _BaseApi implements BaseApi {
   }
 
   @override
-  Future<HttpResponse<AddProductResponse>> addProduct(
+  Future<HttpResponse<AddProductResponse>> salesAddProduct(
+    String bearerToken,
     String idSales,
     String dateRequest,
     String productName,
@@ -139,7 +180,8 @@ class _BaseApi implements BaseApi {
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': bearerToken};
+    _headers.removeWhere((k, v) => v == null);
     final _data = FormData();
     _data.fields.add(MapEntry(
       'id_sales',
@@ -197,6 +239,139 @@ class _BaseApi implements BaseApi {
     late AddProductResponse _value;
     try {
       _value = AddProductResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    final httpResponse = HttpResponse(_value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<UpdateProductResponse>> salesUpdateProduct(
+    String bearerToken,
+    String id,
+    String capitalPrice,
+    String deliveryType,
+    String shippingCost,
+    String deliveryDuration,
+    String availableStock,
+    String supplierName,
+    File photoFromSupplier,
+    String picSupplier,
+    String picPhoneNumber,
+    String ownStock,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': bearerToken};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'id',
+      id,
+    ));
+    _data.fields.add(MapEntry(
+      'capital_price',
+      capitalPrice,
+    ));
+    _data.fields.add(MapEntry(
+      'delivery_type',
+      deliveryType,
+    ));
+    _data.fields.add(MapEntry(
+      'shipping_cost',
+      shippingCost,
+    ));
+    _data.fields.add(MapEntry(
+      'delivery_duration',
+      deliveryDuration,
+    ));
+    _data.fields.add(MapEntry(
+      'available_stock',
+      availableStock,
+    ));
+    _data.fields.add(MapEntry(
+      'supplier_name',
+      supplierName,
+    ));
+    _data.files.add(MapEntry(
+      'photo_from_supplier',
+      MultipartFile.fromFileSync(
+        photoFromSupplier.path,
+        filename: photoFromSupplier.path.split(Platform.pathSeparator).last,
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'pic_supplier',
+      picSupplier,
+    ));
+    _data.fields.add(MapEntry(
+      'pic_phone_number',
+      picPhoneNumber,
+    ));
+    _data.fields.add(MapEntry(
+      'own_stock',
+      ownStock,
+    ));
+    final _options =
+        _setStreamType<HttpResponse<UpdateProductResponse>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'multipart/form-data',
+    )
+            .compose(
+              _dio.options,
+              '/api/sales-request/update',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UpdateProductResponse _value;
+    try {
+      _value = UpdateProductResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    final httpResponse = HttpResponse(_value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<ProductResponse>> salesGetProduct(
+      String bearerToken) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': bearerToken};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<HttpResponse<ProductResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/sales-request/data',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ProductResponse _value;
+    try {
+      _value = ProductResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

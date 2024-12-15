@@ -41,7 +41,7 @@ class PurchasingProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(5.0),
+                  borderRadius: BorderRadius.circular(10.0),
                   child: CachedNetworkImage(
                     imageUrl: data.productPhoto,
                     width: double.infinity,

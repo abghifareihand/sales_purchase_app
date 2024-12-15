@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class SalesProductUpload extends StatelessWidget {
+class SelectPhotoUpload extends StatelessWidget {
   final VoidCallback onGallerySelected;
   final VoidCallback onCameraSelected;
 
-  const SalesProductUpload({
+  const SelectPhotoUpload({
     super.key,
     required this.onGallerySelected,
     required this.onCameraSelected,

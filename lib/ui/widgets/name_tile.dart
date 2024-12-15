@@ -45,7 +45,7 @@ class NameTile extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: AppFont.bold.copyWith(
+                style: AppFont.semiBold.copyWith(
                   color: purchasing ? AppColor.primary : AppColor.white,
                   fontSize: 16,
                 ),

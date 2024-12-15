@@ -36,7 +36,7 @@ ProductData _$ProductDataFromJson(Map<String, dynamic> json) => ProductData(
       capitalPrice: (json['capital_price'] as num?)?.toInt(),
       deliveryType: json['delivery_type'] as String?,
       shippingCost: (json['shipping_cost'] as num?)?.toInt(),
-      deliveryDuration: json['delivery_duration'] as String?,
+      deliveryDuration: (json['delivery_duration'] as num?)?.toInt(),
       availableStock: (json['available_stock'] as num?)?.toInt(),
       supplierName: json['supplier_name'] as String?,
       supplierAddress: json['supplier_address'] as String?,
@@ -48,9 +48,8 @@ ProductData _$ProductDataFromJson(Map<String, dynamic> json) => ProductData(
       updatedAt: json['updated_at'] as String,
       marginMinimal: (json['margin_minimal'] as num).toDouble(),
       marginMaximal: (json['margin_maximal'] as num).toDouble(),
-      hargaJualMinimal: (json['harga_jual_minimal'] as num).toDouble(),
-      hargaJualMaximal: (json['harga_jual_maximal'] as num).toDouble(),
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      hargaJualMinimal: (json['harga_jual_minimal'] as num).toInt(),
+      hargaJualMaximal: (json['harga_jual_maximal'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ProductDataToJson(ProductData instance) =>
@@ -82,23 +81,4 @@ Map<String, dynamic> _$ProductDataToJson(ProductData instance) =>
       'margin_maximal': instance.marginMaximal,
       'harga_jual_minimal': instance.hargaJualMinimal,
       'harga_jual_maximal': instance.hargaJualMaximal,
-      'user': instance.user,
-    };
-
-User _$UserFromJson(Map<String, dynamic> json) => User(
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      username: json['username'] as String,
-      role: (json['role'] as num).toInt(),
-      createdAt: json['created_at'] as String,
-      updatedAt: json['updated_at'] as String,
-    );
-
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'username': instance.username,
-      'role': instance.role,
-      'created_at': instance.createdAt,
-      'updated_at': instance.updatedAt,
     };

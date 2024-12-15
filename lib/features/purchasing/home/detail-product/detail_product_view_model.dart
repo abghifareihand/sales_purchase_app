@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sales_purchase_app/core/api/base_api.dart';
 import 'package:sales_purchase_app/core/models/purchasing/product_detail_model.dart';
+import 'package:sales_purchase_app/core/services/pref_service.dart';
 import 'package:sales_purchase_app/features/base_view_model.dart';
 
 class DetailProductViewModel extends BaseViewModel {
@@ -32,7 +33,11 @@ class DetailProductViewModel extends BaseViewModel {
   Future<void> fetchDetail() async {
     setBusy(true);
     try {
-      final HttpResponse<ProductDetailResponse> productDetailResponse = await baseApi.getDetailProduct(productId);
+      final String? authToken = await PrefService.getAuthToken();
+      final HttpResponse<ProductDetailResponse> productDetailResponse = await baseApi.purchasingGetDetailProduct(
+        'Bearer $authToken',
+        productId,
+      );
       final statusCode = productDetailResponse.response.statusCode;
       final status = productDetailResponse.data.status;
       if (statusCode == 200 && status == 'success') {
@@ -44,5 +49,9 @@ class DetailProductViewModel extends BaseViewModel {
       apiMessage = 'Error: $e';
     }
     setBusy(false);
+  }
+
+  Future<void> refreshDetail() async {
+    await fetchDetail();
   }
 }

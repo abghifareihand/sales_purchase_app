@@ -19,15 +19,15 @@ class AddProductViewModel extends BaseViewModel {
     required this.baseApi,
   });
 
-  final BaseApi baseApi;
   final TextEditingController nameProductController = TextEditingController();
   final TextEditingController quantityProductController = TextEditingController();
   final TextEditingController descProductController = TextEditingController();
   final TextEditingController partNumberController = TextEditingController();
   final TextEditingController custNameController = TextEditingController();
+
+  final BaseApi baseApi;
   DateTime? selectDate;
   File? photoProduct;
-
   String apiMessage = '';
 
   @override
@@ -102,15 +102,17 @@ class AddProductViewModel extends BaseViewModel {
     setBusy(true);
     try {
       final userId = await getUserId();
-      final File file = File(photoProduct!.path);
+      final File filePhoto = File(photoProduct!.path);
       final DateTime dateToSend = selectDate ?? DateTime.now();
       final formattedDate = DateFormat('yyyy-MM-dd').format(dateToSend);
+      final String? authToken = await PrefService.getAuthToken();
 
-      final HttpResponse<AddProductResponse> productResponse = await baseApi.addProduct(
+      final HttpResponse<AddProductResponse> productResponse = await baseApi.salesAddProduct(
+        'Bearer $authToken',
         userId.toString(),
         formattedDate,
         nameProductController.text,
-        file,
+        filePhoto,
         quantityProductController.text,
         descProductController.text,
         partNumberController.text.toUpperCase(),

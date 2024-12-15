@@ -23,7 +23,7 @@ class CustomUpload extends StatelessWidget {
           label,
           style: AppFont.bold.copyWith(
             color: AppColor.black,
-            fontSize: 14,
+            fontSize: 16,
           ),
         ),
         const SizedBox(height: 8.0),

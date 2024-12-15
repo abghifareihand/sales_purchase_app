@@ -31,17 +31,29 @@ class $AssetsImagesGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/ic_about.svg
+  String get icAbout => 'assets/svg/ic_about.svg';
+
+  /// File path: assets/svg/ic_account.svg
+  String get icAccount => 'assets/svg/ic_account.svg';
+
+  /// File path: assets/svg/ic_chevron-right.svg
+  String get icChevronRight => 'assets/svg/ic_chevron-right.svg';
+
   /// File path: assets/svg/ic_email.svg
   String get icEmail => 'assets/svg/ic_email.svg';
+
+  /// File path: assets/svg/ic_exit.svg
+  String get icExit => 'assets/svg/ic_exit.svg';
+
+  /// File path: assets/svg/ic_help.svg
+  String get icHelp => 'assets/svg/ic_help.svg';
 
   /// File path: assets/svg/ic_home.svg
   String get icHome => 'assets/svg/ic_home.svg';
 
   /// File path: assets/svg/ic_home_active.svg
   String get icHomeActive => 'assets/svg/ic_home_active.svg';
-
-  /// File path: assets/svg/ic_logout.svg
-  String get icLogout => 'assets/svg/ic_logout.svg';
 
   /// File path: assets/svg/ic_password.svg
   String get icPassword => 'assets/svg/ic_password.svg';
@@ -72,10 +84,14 @@ class $AssetsSvgGen {
 
   /// List of all assets
   List<String> get values => [
+        icAbout,
+        icAccount,
+        icChevronRight,
         icEmail,
+        icExit,
+        icHelp,
         icHome,
         icHomeActive,
-        icLogout,
         icPassword,
         icPerson,
         icPersonActive,

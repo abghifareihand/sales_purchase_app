@@ -1,10 +1,33 @@
-const List<String> _dayNames = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+import 'package:intl/intl.dart';
 
-const List<String> _monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+const List<String> _dayNames = [
+  'Senin',
+  'Selasa',
+  'Rabu',
+  'Kamis',
+  'Jumat',
+  'Sabtu',
+  'Minggu',
+];
+
+const List<String> _monthNames = [
+  'Januari',
+  'Februari',
+  'Maret',
+  'April',
+  'Mei',
+  'Juni',
+  'Juli',
+  'Agustus',
+  'September',
+  'Oktober',
+  'November',
+  'Desember',
+];
 
 extension DateTimeExt on DateTime {
-  DateTime get localTime => toLocal(); //time zone device
-  DateTime get wibTime => toUtc().add(const Duration(hours: 7)).toLocal(); //return time in timezone wib
+  DateTime get localTime => toLocal();
+  DateTime get wibTime => toUtc().add(const Duration(hours: 7)).toLocal();
 
   String toFormattedDate() {
     String dayName = _dayNames[wibTime.weekday - 1];
@@ -44,5 +67,20 @@ extension DateTimeExt on DateTime {
     String month = wibTime.month.toString().padLeft(2, '0');
     String day = wibTime.day.toString().padLeft(2, '0');
     return '$year-$month-$day';
+  }
+}
+
+extension StringToDateTime on String {
+  DateTime toDateTime() {
+    return DateFormat("yyyy-MM-dd").parse(this);
+  }
+
+  String toFormattedDateString() {
+    DateTime dateTime = toDateTime();
+    String dayName = _dayNames[dateTime.weekday - 1];
+    String day = dateTime.day.toString();
+    String month = _monthNames[dateTime.month - 1];
+    String year = dateTime.year.toString();
+    return '$dayName, $day $month $year';
   }
 }

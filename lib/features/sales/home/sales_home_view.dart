@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sales_purchase_app/features/sales/home/sales_home_view_model.dart';
 import 'package:sales_purchase_app/ui/routes/app_routes.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
 import 'package:sales_purchase_app/ui/shared/app_image.dart';
+import 'package:sales_purchase_app/ui/shared/app_utils.dart';
 import 'package:sales_purchase_app/ui/widgets/name_tile.dart';
 import 'package:sales_purchase_app/ui/widgets/sales_menu_card.dart';
 
@@ -13,7 +15,9 @@ class SalesHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<SalesHomeViewModel>(
-      model: SalesHomeViewModel(),
+      model: SalesHomeViewModel(
+        baseApi: Provider.of(context),
+      ),
       onModelReady: (SalesHomeViewModel model) => model.initModel(),
       onModelDispose: (SalesHomeViewModel model) => model.disposeModel(),
       builder: (BuildContext context, SalesHomeViewModel model, _) {
@@ -37,6 +41,7 @@ class HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SalesHomeViewModel model = Provider.of<SalesHomeViewModel>(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -49,9 +54,9 @@ class HomeContent extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const NameTile(
-                    name: 'Agus Darmawan',
-                    role: 'Sales',
+                  NameTile(
+                    name: model.user!.name,
+                    role: AppUtils.getRoleString(model.user!.role),
                   ),
                   const SizedBox(
                     height: 50.0,
@@ -70,8 +75,12 @@ class HomeContent extends StatelessWidget {
                       ),
                       SalesMenuCard(
                         icon: AppImage.vendor,
-                        title: 'List Product',
-                        onPressed: () {},
+                        title: 'Edit Product',
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.salesEditProduct,
+                          );
+                        },
                       ),
                     ],
                   ),

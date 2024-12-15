@@ -67,7 +67,7 @@ class ProductDetailData {
   final int? capitalPrice;
   final String? deliveryType;
   final int? shippingCost;
-  final String? deliveryDuration;
+  final int? deliveryDuration;
   final int? availableStock;
   final String? supplierName;
   final String? supplierAddress;

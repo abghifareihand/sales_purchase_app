@@ -8,7 +8,7 @@ import 'package:sales_purchase_app/ui/components/custom_text_field.dart';
 import 'package:sales_purchase_app/ui/components/custom_upload.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
-import 'package:sales_purchase_app/ui/widgets/sales_product_upload.dart';
+import 'package:sales_purchase_app/ui/widgets/select_photo_upload.dart';
 
 class AddProductView extends StatelessWidget {
   const AddProductView({super.key});
@@ -82,7 +82,7 @@ class AddProductContent extends StatelessWidget {
                   ),
                 ),
                 builder: (context) {
-                  return SalesProductUpload(
+                  return SelectPhotoUpload(
                     onGallerySelected: () => model.pickPhotoProduct(),
                     onCameraSelected: () => model.cameraPhotoProduct(),
                   );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_purchase_app/features/purchasing/home/detail-product/detail_product_view_model.dart';
+import 'package:sales_purchase_app/ui/extensions/formatter.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
 import 'package:sales_purchase_app/ui/shared/app_font.dart';
@@ -46,12 +47,14 @@ class ProductDetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DetailProductViewModel model = Provider.of<DetailProductViewModel>(context);
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
-      child: Column(
+    return RefreshIndicator(
+      color: AppColor.primary,
+      onRefresh: model.refreshDetail,
+      child: ListView(
+        padding: const EdgeInsets.all(20),
         children: [
           Container(
-            height: 300,
+            height: 350,
             width: double.infinity,
             decoration: BoxDecoration(
               color: AppColor.white,
@@ -105,6 +108,61 @@ class ProductDetailContent extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          Text(
+            model.product!.capitalPrice != null ? model.product!.capitalPrice!.currencyFormatRp : '',
+            style: AppFont.semiBold.copyWith(
+              color: AppColor.primary,
+              fontSize: 16,
+            ),
+          ),
+          const SizedBox(
+            height: 16.0,
+          ),
+          Divider(
+            height: 1,
+            color: AppColor.primary.withOpacity(0.2),
+          ),
+          const SizedBox(
+            height: 16.0,
+          ),
+          model.product?.supplierName != null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Supplier',
+                      style: AppFont.semiBold.copyWith(
+                        color: AppColor.black,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      model.product!.supplierName!,
+                      style: AppFont.regular.copyWith(
+                        color: AppColor.black,
+                      ),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                )
+              : const SizedBox.shrink(),
+          const SizedBox(
+            height: 16.0,
+          ),
+          Text(
+            'Description Product',
+            style: AppFont.semiBold.copyWith(
+              color: AppColor.black,
+              fontSize: 16,
+            ),
+          ),
+          Text(
+            model.product!.description,
+            style: AppFont.regular.copyWith(
+              color: AppColor.black,
+            ),
+            textAlign: TextAlign.justify,
           ),
         ],
       ),

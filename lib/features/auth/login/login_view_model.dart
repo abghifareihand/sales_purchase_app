@@ -14,10 +14,10 @@ class LoginViewModel extends BaseViewModel {
   LoginViewModel({
     required this.baseApi,
   });
-  final BaseApi baseApi;
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  final BaseApi baseApi;
   String apiMessage = '';
 
   @override

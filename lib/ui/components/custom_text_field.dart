@@ -67,7 +67,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             widget.label,
             style: AppFont.bold.copyWith(
               color: AppColor.black,
-              fontSize: 14,
+              fontSize: 16,
             ),
           ),
           const SizedBox(height: 12.0),

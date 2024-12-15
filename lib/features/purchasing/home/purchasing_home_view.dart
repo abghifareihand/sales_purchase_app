@@ -4,6 +4,7 @@ import 'package:sales_purchase_app/features/purchasing/home/purchasing_home_view
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
 import 'package:sales_purchase_app/ui/shared/app_font.dart';
+import 'package:sales_purchase_app/ui/shared/app_utils.dart';
 import 'package:sales_purchase_app/ui/widgets/name_tile.dart';
 import 'package:sales_purchase_app/ui/widgets/purchasing_product_card.dart';
 
@@ -51,9 +52,9 @@ class HomeContent extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const NameTile(
-                    name: 'Agus Darmawan',
-                    role: 'Purchasing',
+                  NameTile(
+                    name: model.user!.name,
+                    role: AppUtils.getRoleString(model.user!.role),
                     purchasing: true,
                   ),
                   const SizedBox(

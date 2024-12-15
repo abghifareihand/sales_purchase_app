@@ -37,7 +37,7 @@ ProductDetailData _$ProductDetailDataFromJson(Map<String, dynamic> json) =>
       capitalPrice: (json['capital_price'] as num?)?.toInt(),
       deliveryType: json['delivery_type'] as String?,
       shippingCost: (json['shipping_cost'] as num?)?.toInt(),
-      deliveryDuration: json['delivery_duration'] as String?,
+      deliveryDuration: (json['delivery_duration'] as num?)?.toInt(),
       availableStock: (json['available_stock'] as num?)?.toInt(),
       supplierName: json['supplier_name'] as String?,
       supplierAddress: json['supplier_address'] as String?,
