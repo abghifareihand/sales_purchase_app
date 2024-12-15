@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_purchase_app/features/purchasing/profile/purchasing_profile_view_model.dart';
 import 'package:sales_purchase_app/ui/components/custom_logout_dialog.dart';
+import 'package:sales_purchase_app/ui/routes/app_routes.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
 import 'package:sales_purchase_app/ui/shared/app_font.dart';
@@ -91,7 +92,15 @@ class ProfileContent extends StatelessWidget {
                 ProfileTile(
                   icon: AppImage.icAccount,
                   title: 'My Account',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      AppRoutes.purchasingUpdateProfile,
+                      arguments: {
+                        'username': model.user!.username,
+                        'name': model.user!.name,
+                      },
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 24.0,

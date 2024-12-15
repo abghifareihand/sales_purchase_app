@@ -3,10 +3,12 @@ import 'package:sales_purchase_app/features/auth/login/login_view.dart';
 import 'package:sales_purchase_app/features/auth/splash/splash_view.dart';
 import 'package:sales_purchase_app/features/purchasing/home/detail-product/detail_product_view.dart';
 import 'package:sales_purchase_app/features/purchasing/main/purchasing_main_view.dart';
+import 'package:sales_purchase_app/features/purchasing/profile/update-profile/update_profile_view.dart' as purchasing;
 import 'package:sales_purchase_app/features/sales/home/add-product/add_product_view.dart';
 import 'package:sales_purchase_app/features/sales/home/edit-product/edit_product_view.dart';
 import 'package:sales_purchase_app/features/sales/home/edit-product/update-product/update_product_view.dart';
 import 'package:sales_purchase_app/features/sales/main/sales_main_view.dart';
+import 'package:sales_purchase_app/features/sales/profile/update-profile/update_profile_view.dart' as sales;
 import 'app_routes.dart';
 
 class AppPages {
@@ -28,6 +30,14 @@ class AppPages {
             productId: productId,
           ),
         );
+      case AppRoutes.purchasingUpdateProfile:
+        final args = settings.arguments! as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => purchasing.UpdateProfileView(
+            username: args['username'],
+            name: args['name'],
+          ),
+        );
 
       // SALES
       case AppRoutes.salesMain:
@@ -41,6 +51,14 @@ class AppPages {
         return MaterialPageRoute(
           builder: (_) => UpdateProductView(
             productId: productId,
+          ),
+        );
+      case AppRoutes.salesUpdateProfile:
+        final args = settings.arguments! as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => sales.UpdateProfileView(
+            username: args['username'],
+            name: args['name'],
           ),
         );
 

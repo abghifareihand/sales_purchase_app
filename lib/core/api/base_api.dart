@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sales_purchase_app/core/models/auth/login_model.dart';
+import 'package:sales_purchase_app/core/models/auth/update_user_model.dart';
 import 'package:sales_purchase_app/core/models/auth/user_model.dart';
 import 'package:sales_purchase_app/core/models/purchasing/product_detail_model.dart';
 import 'package:sales_purchase_app/core/models/purchasing/product_model.dart';
@@ -24,6 +25,12 @@ abstract class BaseApi {
   @GET('/api/sales-request/user')
   Future<HttpResponse<UserResponse>> getUser(
     @Header('Authorization') String bearerToken,
+  );
+
+  @POST('/api/sales-request/update-profile')
+  Future<HttpResponse<UpdateUserResponse>> updateUser(
+    @Header('Authorization') String bearerToken,
+    @Body() Map<String, dynamic> request,
   );
 
   /// [PURCHASING]
