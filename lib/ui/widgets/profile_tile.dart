@@ -45,3 +45,43 @@ class ProfileTile extends StatelessWidget {
     );
   }
 }
+
+class ProfileTilePurchasing extends StatelessWidget {
+  final String icon;
+  final String title;
+  final VoidCallback onTap;
+  const ProfileTilePurchasing({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        children: [
+          IconCirclePurchasing(
+            icon: icon,
+          ),
+          const SizedBox(
+            width: 16.0,
+          ),
+          Text(
+            title,
+            style: AppFont.medium.copyWith(
+              color: AppColor.black,
+              fontSize: 16,
+            ),
+          ),
+          const Spacer(),
+          SvgPicture.asset(
+            AppImage.icChevronRight,
+          ),
+        ],
+      ),
+    );
+  }
+}

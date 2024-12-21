@@ -57,7 +57,7 @@ class PurchasingProfileViewModel extends BaseViewModel {
       CustomSnackbar.show(
         context,
         message: 'Logout success',
-        backgroundColor: AppColor.primary,
+        backgroundColor: AppColor.secondary,
       );
       Navigator.of(context).pushNamedAndRemoveUntil(
         AppRoutes.authLogin,

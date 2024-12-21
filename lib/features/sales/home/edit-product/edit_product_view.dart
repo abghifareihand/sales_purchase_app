@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sales_purchase_app/features/sales/home/edit-product/edit_product_view_model.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
+import 'package:sales_purchase_app/ui/shared/app_font.dart';
 import 'package:sales_purchase_app/ui/widgets/sales_product_card.dart';
 
 class EditProductView extends StatelessWidget {
@@ -19,7 +20,15 @@ class EditProductView extends StatelessWidget {
       builder: (BuildContext context, EditProductViewModel model, _) {
         return Scaffold(
           appBar: AppBar(
+            elevation: 0,
             title: const Text('My Product'),
+            centerTitle: true,
+            backgroundColor: AppColor.white,
+            titleTextStyle: AppFont.bold.copyWith(
+              color: AppColor.primary,
+              fontSize: 16,
+            ),
+            iconTheme: const IconThemeData(color: AppColor.primary),
           ),
           backgroundColor: AppColor.white,
           body: model.isBusy
@@ -41,24 +50,22 @@ class EditProductContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final EditProductViewModel model = Provider.of<EditProductViewModel>(context);
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          ListView.separated(
-            padding: const EdgeInsets.all(20),
-            itemCount: model.products.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 16.0,
-            ),
-            itemBuilder: (context, index) {
-              final product = model.products[index];
-              return SalesProductCard(data: product);
-            },
+    return ListView(
+      children: [
+        ListView.separated(
+          padding: const EdgeInsets.all(20),
+          itemCount: model.products.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 16.0,
           ),
-        ],
-      ),
+          itemBuilder: (context, index) {
+            final product = model.products[index];
+            return SalesProductCard(data: product);
+          },
+        ),
+      ],
     );
   }
 }

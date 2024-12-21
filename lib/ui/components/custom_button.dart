@@ -10,6 +10,7 @@ class Button extends StatelessWidget {
     required this.label,
     this.style = ButtonStyleType.filled,
     this.color = AppColor.primary,
+    this.sideColor = AppColor.primary,
     this.textColor = Colors.white,
     this.width = double.infinity,
     this.height = 54.0,
@@ -30,6 +31,7 @@ class Button extends StatelessWidget {
     this.style = ButtonStyleType.outlined,
     this.color = Colors.transparent,
     this.textColor = AppColor.black,
+    this.sideColor = AppColor.primary,
     this.width = double.infinity,
     this.height = 54.0,
     this.borderRadius = 14.0,
@@ -47,6 +49,7 @@ class Button extends StatelessWidget {
   final ButtonStyleType style;
   final Color color;
   final Color textColor;
+  final Color sideColor;
   final double? width;
   final double height;
   final double borderRadius;
@@ -100,7 +103,7 @@ class Button extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                 padding: padding,
                 backgroundColor: color,
-                side: const BorderSide(color: AppColor.primary),
+                side: BorderSide(color: sideColor),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),

@@ -73,6 +73,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           const SizedBox(height: 12.0),
         ],
         TextFormField(
+          cursorColor: AppColor.primary,
           style: AppFont.medium.copyWith(
             color: AppColor.black,
             fontSize: 14,
@@ -101,11 +102,22 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 : widget.suffixIcon,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius),
-              borderSide: const BorderSide(color: AppColor.stroke),
+              borderSide: const BorderSide(
+                color: AppColor.stroke,
+              ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius),
-              borderSide: const BorderSide(color: AppColor.stroke),
+              borderSide: const BorderSide(
+                color: AppColor.stroke,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+              borderSide: const BorderSide(
+                color: AppColor.primary,
+                width: 2,
+              ),
             ),
             hintText: widget.hintText ?? widget.label,
             helperText: widget.helperText,

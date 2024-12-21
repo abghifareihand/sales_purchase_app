@@ -42,54 +42,39 @@ class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SalesHomeViewModel model = Provider.of<SalesHomeViewModel>(context);
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.3,
-                color: AppColor.primary,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  NameTile(
-                    name: model.user!.name,
-                    role: AppUtils.getRoleString(model.user!.role),
-                  ),
-                  const SizedBox(
-                    height: 50.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SalesMenuCard(
-                        icon: AppImage.product,
-                        title: 'Create Product',
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            AppRoutes.salesAddProduct,
-                          );
-                        },
-                      ),
-                      SalesMenuCard(
-                        icon: AppImage.vendor,
-                        title: 'Edit Product',
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            AppRoutes.salesEditProduct,
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              )
-            ],
-          ),
-        ],
-      ),
+    return ListView(
+      children: [
+        NameTileSales(
+          name: model.user!.name,
+          role: AppUtils.getRoleString(model.user!.role),
+        ),
+        const SizedBox(
+          height: 20.0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SalesMenuCard(
+              icon: AppImage.product,
+              title: 'Create Product',
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  AppRoutes.salesAddProduct,
+                );
+              },
+            ),
+            SalesMenuCard(
+              icon: AppImage.vendor,
+              title: 'Edit Product',
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  AppRoutes.salesEditProduct,
+                );
+              },
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

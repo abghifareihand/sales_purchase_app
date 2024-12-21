@@ -59,7 +59,7 @@ class MainContent extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           currentIndex: model.selectedIndex,
           backgroundColor: AppColor.white,
-          selectedItemColor: AppColor.primary,
+          selectedItemColor: AppColor.secondary,
           selectedFontSize: 12,
           unselectedFontSize: 12,
           onTap: model.onItemTapped,
@@ -91,7 +91,7 @@ class MainContent extends StatelessWidget {
       isActive ? iconActive : iconDefault,
       colorFilter: isActive
           ? const ColorFilter.mode(
-              AppColor.primary,
+              AppColor.secondary,
               BlendMode.srcIn,
             )
           : const ColorFilter.mode(

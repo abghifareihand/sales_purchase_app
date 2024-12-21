@@ -8,6 +8,7 @@ import 'package:sales_purchase_app/ui/components/custom_text_field.dart';
 import 'package:sales_purchase_app/ui/components/custom_upload.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
+import 'package:sales_purchase_app/ui/shared/app_font.dart';
 import 'package:sales_purchase_app/ui/widgets/select_photo_upload.dart';
 
 class AddProductView extends StatelessWidget {
@@ -26,12 +27,20 @@ class AddProductView extends StatelessWidget {
           children: [
             Scaffold(
               appBar: AppBar(
+                elevation: 0,
                 title: const Text('Create Product'),
+                centerTitle: true,
+                backgroundColor: AppColor.white,
+                titleTextStyle: AppFont.bold.copyWith(
+                  color: AppColor.primary,
+                  fontSize: 16,
+                ),
+                iconTheme: const IconThemeData(color: AppColor.primary),
               ),
               backgroundColor: AppColor.white,
               body: const AddProductContent(),
             ),
-            if (model.isBusy) const CustomLoadingDialog(),
+            if (model.isBusy) const CustomLoadingDialog(color: AppColor.primary),
           ],
         );
       },
@@ -45,114 +54,112 @@ class AddProductContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AddProductViewModel model = Provider.of<AddProductViewModel>(context);
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          CustomDatePicker(
-            initialDate: DateTime.now(),
-            label: 'Date',
-            onDateSelected: (selectedDate) {
-              model.selectDate = selectedDate;
-            },
-          ),
-          const SizedBox(
-            height: 16.0,
-          ),
-          CustomTextField(
-            controller: model.nameProductController,
-            label: 'Name',
-            textInputAction: TextInputAction.next,
-            onChanged: (value) {
-              model.updateNameProduct(value);
-            },
-          ),
-          const SizedBox(
-            height: 16.0,
-          ),
-          CustomUpload(
-            label: 'Photo',
-            imageFile: model.photoProduct,
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(12.0),
-                  ),
+    return ListView(
+      padding: const EdgeInsets.all(20),
+      children: [
+        CustomDatePicker(
+          initialDate: DateTime.now(),
+          label: 'Date',
+          onDateSelected: (selectedDate) {
+            model.selectDate = selectedDate;
+          },
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        CustomTextField(
+          controller: model.nameProductController,
+          label: 'Name',
+          textInputAction: TextInputAction.next,
+          onChanged: (value) {
+            model.updateNameProduct(value);
+          },
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        CustomUpload(
+          label: 'Photo',
+          imageFile: model.photoProduct,
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(12.0),
                 ),
-                builder: (context) {
-                  return SelectPhotoUpload(
-                    onGallerySelected: () => model.pickPhotoProduct(),
-                    onCameraSelected: () => model.cameraPhotoProduct(),
-                  );
-                },
-              );
-            },
-          ),
-          const SizedBox(
-            height: 16.0,
-          ),
-          CustomTextField(
-            controller: model.partNumberController,
-            label: 'Part Number',
-            textCapitalization: TextCapitalization.characters,
-            textInputAction: TextInputAction.next,
-            onChanged: (value) {
-              model.updatePartNumber(value);
-            },
-          ),
-          const SizedBox(
-            height: 16.0,
-          ),
-          CustomTextField(
-            controller: model.quantityProductController,
-            label: 'Quantity',
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.next,
-            onChanged: (value) {
-              model.updateQuantityProduct(value);
-            },
-          ),
-          const SizedBox(
-            height: 16.0,
-          ),
-          CustomTextField(
-            controller: model.descProductController,
-            label: 'Description',
-            textInputAction: TextInputAction.next,
-            maxLines: 4,
-            onChanged: (value) {
-              model.updateDescProduct(value);
-            },
-          ),
-          const SizedBox(
-            height: 16.0,
-          ),
-          CustomTextField(
-            controller: model.custNameController,
-            label: 'Customer Name',
-            textCapitalization: TextCapitalization.words,
-            onChanged: (value) {
-              model.updateCustName(value);
-            },
-          ),
-          const SizedBox(
-            height: 40.0,
-          ),
-          Button.filled(
-            onPressed: model.isFormValid
-                ? () async {
-                    await model.createProduct(context);
-                  }
-                : null,
-            label: 'Create',
-          ),
-          const SizedBox(
-            height: 20.0,
-          ),
-        ],
-      ),
+              ),
+              builder: (context) {
+                return SelectPhotoUpload(
+                  onGallerySelected: () => model.pickPhotoProduct(),
+                  onCameraSelected: () => model.cameraPhotoProduct(),
+                );
+              },
+            );
+          },
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        CustomTextField(
+          controller: model.partNumberController,
+          label: 'Part Number',
+          textCapitalization: TextCapitalization.characters,
+          textInputAction: TextInputAction.next,
+          onChanged: (value) {
+            model.updatePartNumber(value);
+          },
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        CustomTextField(
+          controller: model.quantityProductController,
+          label: 'Quantity',
+          keyboardType: TextInputType.number,
+          textInputAction: TextInputAction.next,
+          onChanged: (value) {
+            model.updateQuantityProduct(value);
+          },
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        CustomTextField(
+          controller: model.descProductController,
+          label: 'Description',
+          textInputAction: TextInputAction.next,
+          maxLines: 4,
+          onChanged: (value) {
+            model.updateDescProduct(value);
+          },
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        CustomTextField(
+          controller: model.custNameController,
+          label: 'Customer Name',
+          textCapitalization: TextCapitalization.words,
+          onChanged: (value) {
+            model.updateCustName(value);
+          },
+        ),
+        const SizedBox(
+          height: 40.0,
+        ),
+        Button.filled(
+          onPressed: model.isFormValid
+              ? () async {
+                  await model.createProduct(context);
+                }
+              : null,
+          label: 'Create',
+        ),
+        const SizedBox(
+          height: 20.0,
+        ),
+      ],
     );
   }
 }

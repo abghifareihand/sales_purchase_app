@@ -25,13 +25,21 @@ class DetailProductView extends StatelessWidget {
       builder: (BuildContext context, DetailProductViewModel model, _) {
         return Scaffold(
           appBar: AppBar(
+            elevation: 0,
             title: const Text('Detail Product'),
+            centerTitle: true,
+            backgroundColor: AppColor.white,
+            titleTextStyle: AppFont.bold.copyWith(
+              color: AppColor.secondary,
+              fontSize: 16,
+            ),
+            iconTheme: const IconThemeData(color: AppColor.secondary),
           ),
           backgroundColor: AppColor.white,
           body: model.isBusy
               ? const Center(
                   child: CircularProgressIndicator(
-                    color: AppColor.primary,
+                    color: AppColor.secondary,
                   ),
                 )
               : const ProductDetailContent(),
@@ -48,7 +56,7 @@ class ProductDetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final DetailProductViewModel model = Provider.of<DetailProductViewModel>(context);
     return RefreshIndicator(
-      color: AppColor.primary,
+      color: AppColor.secondary,
       onRefresh: model.refreshDetail,
       child: ListView(
         padding: const EdgeInsets.all(20),
@@ -96,7 +104,7 @@ class ProductDetailContent extends StatelessWidget {
                   horizontal: 12,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColor.primary,
+                  color: AppColor.secondary,
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -112,7 +120,7 @@ class ProductDetailContent extends StatelessWidget {
           Text(
             model.product!.capitalPrice != null ? model.product!.capitalPrice!.currencyFormatRp : '',
             style: AppFont.semiBold.copyWith(
-              color: AppColor.primary,
+              color: AppColor.secondary,
               fontSize: 16,
             ),
           ),
@@ -121,7 +129,7 @@ class ProductDetailContent extends StatelessWidget {
           ),
           Divider(
             height: 1,
-            color: AppColor.primary.withOpacity(0.2),
+            color: AppColor.secondary.withOpacity(0.2),
           ),
           const SizedBox(
             height: 16.0,

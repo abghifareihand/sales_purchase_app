@@ -6,6 +6,7 @@ import 'package:sales_purchase_app/ui/components/custom_loading_dialog.dart';
 import 'package:sales_purchase_app/ui/components/custom_text_field.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
+import 'package:sales_purchase_app/ui/shared/app_font.dart';
 
 class UpdateProfileView extends StatelessWidget {
   final String username;
@@ -31,15 +32,23 @@ class UpdateProfileView extends StatelessWidget {
           children: [
             Scaffold(
               appBar: AppBar(
+                elevation: 0,
                 title: const Text('My Account'),
+                centerTitle: true,
+                backgroundColor: AppColor.white,
+                titleTextStyle: AppFont.bold.copyWith(
+                  color: AppColor.primary,
+                  fontSize: 16,
+                ),
+                iconTheme: const IconThemeData(color: AppColor.primary),
               ),
-              backgroundColor: AppColor.background,
+              backgroundColor: AppColor.white,
               body: UpdateProfileContent(
                 username: username,
                 name: name,
               ),
             ),
-            if (model.isBusy) const CustomLoadingDialog(),
+            if (model.isBusy) const CustomLoadingDialog(color: AppColor.primary),
           ],
         );
       },
@@ -59,50 +68,46 @@ class UpdateProfileContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UpdateProfileViewModel model = Provider.of<UpdateProfileViewModel>(context);
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            CustomTextField(
-              controller: model.usernameController,
-              label: 'Username',
-              onChanged: (value) {
-                model.updateUsername(value);
-              },
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            CustomTextField(
-              controller: model.nameController,
-              label: 'Name',
-              onChanged: (value) {
-                model.updateName(value);
-              },
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            CustomTextField(
-              controller: model.passwordController,
-              label: 'Password',
-              obscureText: true,
-            ),
-            const SizedBox(
-              height: 40.0,
-            ),
-            Button.filled(
-              onPressed: model.isFormValid
-                  ? () async {
-                      await model.updateUser(context);
-                    }
-                  : null,
-              label: 'Update Profile',
-            ),
-          ],
+    return ListView(
+      padding: const EdgeInsets.all(20),
+      children: [
+        CustomTextField(
+          controller: model.usernameController,
+          label: 'Username',
+          onChanged: (value) {
+            model.updateUsername(value);
+          },
         ),
-      ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        CustomTextField(
+          controller: model.nameController,
+          label: 'Name',
+          onChanged: (value) {
+            model.updateName(value);
+          },
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        CustomTextField(
+          controller: model.passwordController,
+          label: 'Password',
+          obscureText: true,
+        ),
+        const SizedBox(
+          height: 40.0,
+        ),
+        Button.filled(
+          onPressed: model.isFormValid
+              ? () async {
+                  await model.updateUser(context);
+                }
+              : null,
+          label: 'Update Profile',
+        ),
+      ],
     );
   }
 }

@@ -55,6 +55,10 @@ class ProfileContent extends StatelessWidget {
             AppImage.icPersonActive,
             width: 120,
             height: 120,
+            colorFilter: const ColorFilter.mode(
+              AppColor.primary,
+              BlendMode.srcIn,
+            ),
           ),
           Text(
             model.user!.name,

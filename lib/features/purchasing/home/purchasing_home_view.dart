@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:sales_purchase_app/features/purchasing/home/purchasing_home_view_model.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
-import 'package:sales_purchase_app/ui/shared/app_font.dart';
 import 'package:sales_purchase_app/ui/shared/app_utils.dart';
 import 'package:sales_purchase_app/ui/widgets/name_tile.dart';
 import 'package:sales_purchase_app/ui/widgets/purchasing_product_card.dart';
@@ -25,7 +24,7 @@ class PurchasingHomeView extends StatelessWidget {
           body: model.isBusy
               ? const Center(
                   child: CircularProgressIndicator(
-                    color: AppColor.primary,
+                    color: AppColor.secondary,
                   ),
                 )
               : const HomeContent(),
@@ -42,52 +41,36 @@ class HomeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final PurchasingHomeViewModel model = Provider.of<PurchasingHomeViewModel>(context);
     return RefreshIndicator(
-      color: AppColor.primary,
-      onRefresh: model.refreshProduct,
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  NameTile(
-                    name: model.user!.name,
-                    role: AppUtils.getRoleString(model.user!.role),
-                    purchasing: true,
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  Text(
-                    'Data Product',
-                    style: AppFont.bold.copyWith(
-                      color: AppColor.black,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+      color: AppColor.secondary,
+      onRefresh: () => model.refreshProduct(),
+      child: ListView(
+        children: [
+          NameTilePurchasing(
+            name: model.user!.name,
+            role: AppUtils.getRoleString(model.user!.role),
           ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            sliver: SliverGrid(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final product = model.products[index];
-                  return PurchasingProductCard(data: product);
-                },
-                childCount: model.products.length,
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 20,
-                childAspectRatio: 0.75,
-              ),
+          const SizedBox(
+            height: 20.0,
+          ),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: model.products.length,
+            padding: const EdgeInsets.symmetric(
+              vertical: 16,
+              horizontal: 20,
             ),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              childAspectRatio: 0.8,
+            ),
+            itemBuilder: (context, index) {
+              return PurchasingProductCard(
+                data: model.products[index],
+              );
+            },
           ),
         ],
       ),

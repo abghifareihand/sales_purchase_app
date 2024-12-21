@@ -6,6 +6,7 @@ import 'package:sales_purchase_app/ui/components/custom_loading_dialog.dart';
 import 'package:sales_purchase_app/ui/components/custom_text_field.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/base_view.dart';
+import 'package:sales_purchase_app/ui/shared/app_font.dart';
 
 class UpdateProfileView extends StatelessWidget {
   final String username;
@@ -31,15 +32,23 @@ class UpdateProfileView extends StatelessWidget {
           children: [
             Scaffold(
               appBar: AppBar(
+                elevation: 0,
                 title: const Text('My Account'),
+                centerTitle: true,
+                backgroundColor: AppColor.white,
+                titleTextStyle: AppFont.bold.copyWith(
+                  color: AppColor.secondary,
+                  fontSize: 16,
+                ),
+                iconTheme: const IconThemeData(color: AppColor.secondary),
               ),
-              backgroundColor: AppColor.background,
+              backgroundColor: AppColor.white,
               body: UpdateProfileContent(
                 username: username,
                 name: name,
               ),
             ),
-            if (model.isBusy) const CustomLoadingDialog(),
+            if (model.isBusy) const CustomLoadingDialog(color: AppColor.secondary),
           ],
         );
       },
@@ -93,6 +102,7 @@ class UpdateProfileContent extends StatelessWidget {
               height: 40.0,
             ),
             Button.filled(
+              color: AppColor.secondary,
               onPressed: model.isFormValid
                   ? () async {
                       await model.updateUser(context);

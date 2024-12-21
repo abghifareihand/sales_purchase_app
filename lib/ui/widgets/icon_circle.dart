@@ -29,3 +29,31 @@ class IconCircle extends StatelessWidget {
     );
   }
 }
+
+class IconCirclePurchasing extends StatelessWidget {
+  final String icon;
+  const IconCirclePurchasing({
+    super.key,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        color: AppColor.secondary.withOpacity(0.1),
+        shape: BoxShape.circle,
+      ),
+      padding: const EdgeInsets.all(10),
+      child: SvgPicture.asset(
+        icon,
+        colorFilter: const ColorFilter.mode(
+          AppColor.secondary,
+          BlendMode.srcIn,
+        ),
+      ),
+    );
+  }
+}

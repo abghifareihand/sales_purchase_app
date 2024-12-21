@@ -28,7 +28,7 @@ class LoginView extends StatelessWidget {
               backgroundColor: AppColor.background,
               body: LoginContent(),
             ),
-            if (model.isBusy) const CustomLoadingDialog(),
+            if (model.isBusy) const CustomLoadingDialog(color: AppColor.primary),
           ],
         );
       },
@@ -42,68 +42,76 @@ class LoginContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LoginViewModel model = Provider.of<LoginViewModel>(context);
-    return SingleChildScrollView(
+    return ListView(
       padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40),
-              child: Text(
-                'LOGIN',
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Login',
                 style: AppFont.bold.copyWith(
-                  color: AppColor.primary,
-                  fontSize: 40,
+                  color: AppColor.black,
+                  fontSize: 28,
                 ),
               ),
-            ),
+              Text(
+                'Welcome back, please login to your account',
+                style: AppFont.regular.copyWith(
+                  color: AppColor.gray,
+                  fontSize: 14,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 30.0,
+        ),
+        const SizedBox(
+          height: 20.0,
+        ),
+        CustomTextField(
+          showLabel: false,
+          controller: model.usernameController,
+          label: 'Username',
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SvgPicture.asset(AppImage.icUsername),
           ),
-          CustomTextField(
-            showLabel: false,
-            controller: model.usernameController,
-            label: 'Username',
-            prefixIcon: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: SvgPicture.asset(AppImage.icUsername),
-            ),
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.next,
-            onChanged: (value) {
-              model.updateUsername(value);
-            },
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.next,
+          onChanged: (value) {
+            model.updateUsername(value);
+          },
+        ),
+        const SizedBox(
+          height: 20.0,
+        ),
+        CustomTextField(
+          showLabel: false,
+          controller: model.passwordController,
+          label: 'Password',
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SvgPicture.asset(AppImage.icPassword),
           ),
-          const SizedBox(
-            height: 20.0,
-          ),
-          CustomTextField(
-            showLabel: false,
-            controller: model.passwordController,
-            label: 'Password',
-            prefixIcon: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: SvgPicture.asset(AppImage.icPassword),
-            ),
-            obscureText: true,
-            onChanged: (value) {
-              model.updatePassword(value);
-            },
-          ),
-          const SizedBox(
-            height: 40.0,
-          ),
-          Button.filled(
-            onPressed: model.isFormValid
-                ? () async {
-                    await model.login(context);
-                  }
-                : null,
-            label: 'Login',
-          ),
-        ],
-      ),
+          obscureText: true,
+          onChanged: (value) {
+            model.updatePassword(value);
+          },
+        ),
+        const SizedBox(
+          height: 40.0,
+        ),
+        Button.filled(
+          onPressed: model.isFormValid
+              ? () async {
+                  await model.login(context);
+                }
+              : null,
+          label: 'Login',
+        ),
+      ],
     );
   }
 }

@@ -77,3 +77,78 @@ class CustomLogoutDialog extends StatelessWidget {
     );
   }
 }
+
+class CustomLogoutDialogPurchasing extends StatelessWidget {
+  const CustomLogoutDialogPurchasing({
+    super.key,
+    required this.onPressed,
+  });
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: AppColor.white,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(14.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SvgPicture.asset(
+              AppImage.icLogout,
+              width: 60,
+              height: 60,
+              colorFilter: const ColorFilter.mode(
+                AppColor.secondary,
+                BlendMode.srcIn,
+              ),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            Text(
+              'Are you sure logout?',
+              style: AppFont.semiBold.copyWith(
+                color: AppColor.black,
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 32.0),
+            Row(
+              children: [
+                Expanded(
+                  child: Button.outlined(
+                    sideColor: AppColor.secondary,
+                    height: 48,
+                    borderRadius: 12,
+                    onPressed: () => Navigator.pop(context),
+                    label: 'No',
+                    textColor: AppColor.secondary,
+                  ),
+                ),
+                const SizedBox(
+                  width: 24.0,
+                ),
+                Expanded(
+                  child: Button.filled(
+                    color: AppColor.secondary,
+                    height: 48,
+                    borderRadius: 12,
+                    onPressed: onPressed,
+                    label: 'Yes',
+                    textColor: AppColor.white,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

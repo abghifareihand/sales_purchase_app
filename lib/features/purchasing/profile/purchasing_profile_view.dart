@@ -55,6 +55,10 @@ class ProfileContent extends StatelessWidget {
             AppImage.icPersonActive,
             width: 120,
             height: 120,
+            colorFilter: const ColorFilter.mode(
+              AppColor.secondary,
+              BlendMode.srcIn,
+            ),
           ),
           Text(
             model.user!.name,
@@ -66,7 +70,7 @@ class ProfileContent extends StatelessWidget {
           Text(
             AppUtils.getRoleString(model.user!.role),
             style: AppFont.semiBold.copyWith(
-              color: AppColor.primary,
+              color: AppColor.secondary,
               fontSize: 16,
             ),
           ),
@@ -89,7 +93,7 @@ class ProfileContent extends StatelessWidget {
             ),
             child: Column(
               children: [
-                ProfileTile(
+                ProfileTilePurchasing(
                   icon: AppImage.icAccount,
                   title: 'My Account',
                   onTap: () {
@@ -105,7 +109,7 @@ class ProfileContent extends StatelessWidget {
                 const SizedBox(
                   height: 24.0,
                 ),
-                ProfileTile(
+                ProfileTilePurchasing(
                   icon: AppImage.icHelp,
                   title: 'Help & Support',
                   onTap: () {},
@@ -113,7 +117,7 @@ class ProfileContent extends StatelessWidget {
                 const SizedBox(
                   height: 24.0,
                 ),
-                ProfileTile(
+                ProfileTilePurchasing(
                   icon: AppImage.icAbout,
                   title: 'About App',
                   onTap: () {},
@@ -121,7 +125,7 @@ class ProfileContent extends StatelessWidget {
                 const SizedBox(
                   height: 24.0,
                 ),
-                ProfileTile(
+                ProfileTilePurchasing(
                   icon: AppImage.icLogout,
                   title: 'Logout',
                   onTap: () async {
@@ -129,7 +133,7 @@ class ProfileContent extends StatelessWidget {
                       context: context,
                       barrierDismissible: false,
                       builder: (BuildContext context) {
-                        return CustomLogoutDialog(
+                        return CustomLogoutDialogPurchasing(
                           onPressed: () => model.logout(context),
                         );
                       },
