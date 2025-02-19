@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:sales_purchase_app/core/services/remote_service.dart';
 import 'package:sales_purchase_app/ui/components/custom_button.dart';
-import 'package:sales_purchase_app/ui/components/custom_loading_dialog.dart';
 import 'package:sales_purchase_app/ui/components/custom_text_field.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
 import 'package:sales_purchase_app/features/auth/login/login_view_model.dart';
@@ -22,14 +22,9 @@ class LoginView extends StatelessWidget {
       onModelReady: (LoginViewModel model) => model.initModel(),
       onModelDispose: (LoginViewModel model) => model.disposeModel(),
       builder: (BuildContext context, LoginViewModel model, _) {
-        return Stack(
-          children: [
-            const Scaffold(
-              backgroundColor: AppColor.background,
-              body: LoginContent(),
-            ),
-            if (model.isBusy) const CustomLoadingDialog(color: AppColor.primary),
-          ],
+        return const Scaffold(
+          backgroundColor: AppColor.background,
+          body: LoginContent(),
         );
       },
     );
@@ -41,6 +36,7 @@ class LoginContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final remoteConfig = RemoteConfigService();
     final LoginViewModel model = Provider.of<LoginViewModel>(context);
     return ListView(
       padding: const EdgeInsets.all(20),
@@ -51,7 +47,7 @@ class LoginContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Login',
+                '',
                 style: AppFont.bold.copyWith(
                   color: AppColor.black,
                   fontSize: 28,

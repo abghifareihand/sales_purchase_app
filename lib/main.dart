@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_purchase_app/core/services/fcm_service.dart';
+import 'package:sales_purchase_app/core/services/remote_service.dart';
 import 'package:sales_purchase_app/provider_setup.dart';
 import 'package:sales_purchase_app/ui/routes/app_routes.dart';
 import 'package:sales_purchase_app/ui/routes/app_pages.dart' as route;
@@ -14,6 +15,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FcmService().initialize();
+  await RemoteConfigService().initialize();
   runApp(const MyApp());
 }
 

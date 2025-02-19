@@ -4,8 +4,10 @@ import 'package:retrofit/retrofit.dart';
 import 'package:sales_purchase_app/core/api/base_api.dart';
 import 'package:sales_purchase_app/core/models/auth/login_model.dart';
 import 'package:sales_purchase_app/core/services/pref_service.dart';
+import 'package:sales_purchase_app/core/services/remote_service.dart';
 import 'package:sales_purchase_app/features/base_view_model.dart';
 import 'package:sales_purchase_app/ui/components/custom_error_dialog.dart';
+import 'package:sales_purchase_app/ui/components/custom_loading_dialog.dart';
 import 'package:sales_purchase_app/ui/components/custom_snackbar.dart';
 import 'package:sales_purchase_app/ui/routes/app_routes.dart';
 import 'package:sales_purchase_app/ui/shared/app_color.dart';
@@ -50,6 +52,15 @@ class LoginViewModel extends BaseViewModel {
 
   Future<void> login(BuildContext context) async {
     setBusy(true);
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return const CustomLoadingDialog(
+          color: AppColor.primary,
+        );
+      },
+    );
     try {
       final LoginRequest request = LoginRequest(
         username: usernameController.text,
@@ -69,20 +80,24 @@ class LoginViewModel extends BaseViewModel {
 
         final role = result.data?.role;
         apiMessage = result.data!.username;
+
         if (role == 1) {
           if (context.mounted) {
+            Navigator.of(context).pop();
             await Navigator.of(context).pushReplacementNamed(
               AppRoutes.salesMain,
             );
           }
         } else if (role == 2) {
           if (context.mounted) {
+            Navigator.of(context).pop();
             await Navigator.of(context).pushReplacementNamed(
               AppRoutes.purchasingMain,
             );
           }
         } else {
           if (context.mounted) {
+            Navigator.of(context, rootNavigator: true).pop();
             await showDialog(
               context: context,
               barrierDismissible: false,
@@ -96,10 +111,15 @@ class LoginViewModel extends BaseViewModel {
         }
       } else if (statusCode == 200 && status == 'error') {
         if (context.mounted) {
-          CustomSnackbar.show(
-            context,
-            message: 'Incorrect username or password',
-            backgroundColor: AppColor.red,
+          Navigator.of(context, rootNavigator: true).pop();
+          await showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return const CustomErrorDialog(
+                title: 'Incorrect username or password',
+              );
+            },
           );
         }
       }
